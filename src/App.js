@@ -4,13 +4,13 @@ import { Grid } from "semantic-ui-react";
 import axios from "axios";
 import { API_HOST } from "./config.js";
 import SideBar from "./components/SideBar.js";
-import ClientIfo from "./components/ClientInfo.js";
+import ClientInfo from "./components/ClientInfo.js";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { clients: [], isLoading: null, selectedClient: null };
-    this.onSelectclient = this.onSelectclient.bind(this);
+    this.onSelectClient = this.onSelectClient.bind(this);
   }
 
   render() {
@@ -21,27 +21,26 @@ class App extends Component {
             <SideBar
               clients={this.state.clients}
               isLoading={this.state.isLoading}
-              onCardClick={this.onSelectclient}
+              onCardClick={this.onSelectClient}
             />
           </Grid.Column>
 
           <Grid.Column width={11} color={"olive"}>
-            <ClientIfo client={this.state.selectedClient} />
+            <ClientInfo client={this.state.selectedClient} />
           </Grid.Column>
         </Grid>
       </div>
     );
   }
 
-  onSelectclient(client) {
+  onSelectClient(client) {
     this.setState({ selectedClient: client });
   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
     axios.get(`${API_HOST}/clients.json`).then(res => {
-      const clients = res.data;
-      this.setState({ clients, isLoading: false });
+      this.setState({ clients: res.data, isLoading: false });
     });
   }
 }

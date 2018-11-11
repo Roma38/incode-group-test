@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Card, Image, Input, Placeholder, Segment } from "semantic-ui-react";
+import { Card, Image, Input, Placeholder } from "semantic-ui-react";
 
 class SideBar extends Component {
   constructor(props) {
     super(props);
-    this.searchClient = this.searchClient.bind(this);
-    this.state = { shownClients: null };
+    this.state = { filtredClients: null, searchQuery: "" };
   }
 
   render() {
@@ -18,53 +17,34 @@ class SideBar extends Component {
           onChange={e => this.searchClient(e.target.value)}
         />
         {this.props.isLoading ? (
-          <Segment raised>
-            <Placeholder>
-              <Placeholder.Header image>
-                <Placeholder.Line />
-                <Placeholder.Line />
-              </Placeholder.Header>
-            </Placeholder>
-          </Segment>
+          <Card>
+            <Card.Content>
+              <Placeholder>
+                <Placeholder.Header image>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+              </Placeholder>
+            </Card.Content>
+          </Card>
         ) : (
           <Card.Group>
-            {this.state.shownClients
-              ? this.state.shownClients.map((client, index) => (
-                  <Card
-                    key={index}
-                    onClick={() => this.props.onCardClick(client)}
-                  >
-                    <Card.Content>
-                      <Image
-                        floated="left"
-                        size="tiny"
-                        src={client.general.avatar}
-                      />
-                      <Card.Header>
-                        {client.general.firstName} {client.general.lastName}
-                      </Card.Header>
-                      <Card.Meta>{client.job.title}</Card.Meta>
-                    </Card.Content>
-                  </Card>
-                ))
-              : this.props.clients.map((client, index) => (
-                  <Card
-                    key={index}
-                    onClick={() => this.props.onCardClick(client)}
-                  >
-                    <Card.Content>
-                      <Image
-                        floated="left"
-                        size="tiny"
-                        src={client.general.avatar}
-                      />
-                      <Card.Header>
-                        {client.general.firstName} {client.general.lastName}
-                      </Card.Header>
-                      <Card.Meta>{client.job.title}</Card.Meta>
-                    </Card.Content>
-                  </Card>
-                ))}
+            {this.shownClients().map((client, index) => (
+              <Card key={index} onClick={() => this.props.onCardClick(client)}>
+                <Card.Content>
+                  <Image
+                    floated="left"
+                    size="mini"
+                    src={client.general.avatar}
+                  />
+                  <Card.Header>
+                    {client.general.firstName} {client.general.lastName}
+                  </Card.Header>
+                  <Card.Meta>{client.job.title}</Card.Meta>
+                </Card.Content>
+              </Card>
+            ))}
           </Card.Group>
         )}
       </div>
@@ -72,11 +52,13 @@ class SideBar extends Component {
   }
 
   searchClient(value) {
-    const shownClients = this.props.clients.filter(client => {
+    this.setState({ searchQuery: value });
+
+    const filtredClients = this.props.clients.filter(client => {
       for (const property in client) {
         for (const key in client[property]) {
           if (
-            client[property][key].toLowerCase().startsWith(value.toLowerCase())
+            client[property][key].toLowerCase().includes(value.toLowerCase())
           ) {
             return true;
           }
@@ -85,8 +67,14 @@ class SideBar extends Component {
       return false;
     });
 
-    this.setState({ shownClients });
-    console.log(this.state.shownClients);
+    this.setState({ filtredClients });
+    console.log(this.state.filtredClients);
+  }
+
+  shownClients() {
+    return this.state.searchQuery
+      ? this.state.filtredClients
+      : this.props.clients;
   }
 }
 
