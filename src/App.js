@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Grid } from "semantic-ui-react";
 import axios from "axios";
 import { API_HOST } from "./config.js";
 import SideBar from "./components/SideBar.js";
@@ -16,19 +15,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Grid columns={2} divided>
-          <Grid.Column width={5} color={"yellow"}>
-            <SideBar
-              clients={this.state.clients}
-              isLoading={this.state.isLoading}
-              onCardClick={this.onSelectClient}
-            />
-          </Grid.Column>
-
-          <Grid.Column width={11} color={"olive"}>
-            <ClientInfo client={this.state.selectedClient} />
-          </Grid.Column>
-        </Grid>
+        <SideBar
+          clients={this.state.clients}
+          isLoading={this.state.isLoading}
+          onCardClick={this.onSelectClient}
+        />
+        <ClientInfo client={this.state.selectedClient} />
       </div>
     );
   }

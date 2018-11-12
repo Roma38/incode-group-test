@@ -1,3 +1,45 @@
 .App {
   text-align: center;
+  display: flex;
+}
+
+.sideBar {
+  max-width: 314px;
+  min-width: 225px;
+  padding: 0 7px;
+  height: 100vh;
+  overflow: auto;
+  background: #fbbd08;
+}
+
+.search-input {
+  margin: 10px 0;
+}
+
+.client-info {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background: #b5cc18;
+}
+
+.client-avatar {
+  padding-right: 10px;
+}
+
+.info-placeholder.ui.placeholder {
+  width: 250;
+  background-color: "#b5cc18";
+  margin-top: 10px;
+}
+
+.client-info .ui.placeholder,
+.client-info .ui.placeholder .image.header:after,
+.client-info .ui.placeholder .line,
+.client-info .ui.placeholder .line:after,
+.client-info .ui.placeholder > :before {
+  background-color: #b5cc18;
 }

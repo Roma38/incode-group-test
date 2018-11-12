@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Card, Image, Input, Placeholder } from "semantic-ui-react";
 
+/* TODO Поиск. Написать функцию, которая будет фильтровать объект на основании строки поиска */
+/* TODO сделать так чтоб можно было исключать определeнные поля из поиска, например `general.avatar` */
+/* TODO сделать чтоб карточка с выбраным пользователем выделялась */
+
 class SideBar extends Component {
   constructor(props) {
     super(props);
@@ -8,30 +12,41 @@ class SideBar extends Component {
   }
 
   render() {
+    const placeholder = () => (
+      <Card className="clientCard">
+        <Card.Content>
+          <Placeholder>
+            <Placeholder.Header image>
+              <Placeholder.Line />
+              <Placeholder.Line />
+            </Placeholder.Header>
+          </Placeholder>
+        </Card.Content>
+      </Card>
+    );
     return (
-      <div>
+      <div className="sideBar">
         <Input
           icon="users"
           size="medium"
           placeholder="Search..."
+          className="search-input"
           onChange={e => this.searchClient(e.target.value)}
         />
         {this.props.isLoading ? (
-          <Card>
-            <Card.Content>
-              <Placeholder>
-                <Placeholder.Header image>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-              </Placeholder>
-            </Card.Content>
-          </Card>
+          <div>
+            {placeholder()}
+            {placeholder()}
+            {placeholder()}
+          </div>
         ) : (
           <Card.Group>
             {this.shownClients().map((client, index) => (
-              <Card key={index} onClick={() => this.props.onCardClick(client)}>
+              <Card
+                className="clientCard"
+                key={index}
+                onClick={() => this.props.onCardClick(client)}
+              >
                 <Card.Content>
                   <Image
                     floated="left"
@@ -68,7 +83,6 @@ class SideBar extends Component {
     });
 
     this.setState({ filtredClients });
-    console.log(this.state.filtredClients);
   }
 
   shownClients() {
