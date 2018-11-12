@@ -31,11 +31,12 @@
 }
 
 .info-placeholder.ui.placeholder {
-  width: 250;
-  background-color: "#b5cc18";
+  width: 250px;
+  background-color: #b5cc18;
   margin-top: 10px;
 }
 
+/* TODO отрефакторить */
 .client-info .ui.placeholder,
 .client-info .ui.placeholder .image.header:after,
 .client-info .ui.placeholder .line,

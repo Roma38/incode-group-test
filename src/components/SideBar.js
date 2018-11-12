@@ -8,11 +8,15 @@ import { Card, Image, Input, Placeholder } from "semantic-ui-react";
 class SideBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { filtredClients: null, searchQuery: "" };
+    this.state = {
+      filtredClients: null,
+      searchQuery: ""
+    }; /* TODO убрать filtredClients из state'а */
   }
 
   render() {
-    const placeholder = () => (
+    /* TODO вынести в отдельный компонент `ClientCardPlaceholder` */
+    const placeholder = (
       <Card className="clientCard">
         <Card.Content>
           <Placeholder>
@@ -35,9 +39,9 @@ class SideBar extends Component {
         />
         {this.props.isLoading ? (
           <div>
-            {placeholder()}
-            {placeholder()}
-            {placeholder()}
+            {placeholder}
+            {placeholder}
+            {placeholder}
           </div>
         ) : (
           <Card.Group>

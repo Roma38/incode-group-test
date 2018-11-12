@@ -53,9 +53,9 @@ function ClientInfo({ client }) {
             </List>
           </div>
         ) : (
+          /* TODO вынести в `ClientInfoLoader` компонент */
           <Placeholder
             className="info-placeholder"
-            style={{ width: 250, backgroundColor: "#b5cc18" }}
           >
             <Placeholder.Header>
               <Placeholder.Line />
