@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   loaded: false,
   error: null,
-  items: []
+  items: [],
 };
 
 export const clientsReducer = (state = initialState, action) => {

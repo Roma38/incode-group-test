@@ -46,7 +46,10 @@ class AppComponent extends Component {
   }
 }
 
-const mapStateToProps = ({ counter, clients }) => ({ counter, clients });
+const mapStateToProps = ({ selectedClient, clients }) => ({
+  selectedClient,
+  clients
+});
 
 const mapDispatchToProps = dispatch => ({
   clientsLoadStart: () => dispatch(clientsLoadStart()),

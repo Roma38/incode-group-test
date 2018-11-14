@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   display: flex;
 }
 
@@ -14,6 +13,10 @@
 
 .search-input {
   margin: 10px 0;
+}
+
+.search-label {
+ left: 10px;
 }
 
 .client-info {

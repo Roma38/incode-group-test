@@ -1,10 +1,12 @@
 import React from "react";
 import { Image, Header, List, Placeholder } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-function ClientInfo({ client }) {
+function ClientInfoComponent({ selectedClient: client }) {
   return (
     <div className="client-info">
       <div className="client-avatar">
+        {/* TODO сделать плейсхолдеры одним отдельным компонентом */}
         {client ? (
           <Image src={client.general.avatar} />
         ) : (
@@ -54,9 +56,7 @@ function ClientInfo({ client }) {
           </div>
         ) : (
           /* TODO вынести в `ClientInfoLoader` компонент */
-          <Placeholder
-            className="info-placeholder"
-          >
+          <Placeholder className="info-placeholder">
             <Placeholder.Header>
               <Placeholder.Line />
               <Placeholder.Line />
@@ -77,5 +77,14 @@ function ClientInfo({ client }) {
     </div>
   );
 }
+
+const mapStateToProps = ({ selectedClient }) => ({
+  selectedClient
+});
+
+const ClientInfo = connect(
+  mapStateToProps,
+  null
+)(ClientInfoComponent);
 
 export default ClientInfo;
