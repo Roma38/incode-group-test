@@ -25,6 +25,8 @@ class AppComponent extends Component {
     );
   }
 
+  toggleSideBar() {}
+
   componentDidMount() {
     this.props.clientsLoadStart();
     axios

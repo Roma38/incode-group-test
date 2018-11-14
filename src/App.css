@@ -19,6 +19,11 @@
   left: 10px;
 }
 
+.toggle-sideBar.ui.button {
+  display: none;
+  position: absolute;
+}
+
 .client-info {
   flex-grow: 1;
   display: flex;
@@ -59,7 +64,21 @@
 }
 
 @media all and (max-width: 480px) {
-  .sideBar:hover {
+  .toggle-sideBar.ui.button {
+    display: inline-block;
+    z-index: 2;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    transition: transform 0.7s ease-in-out;
+    border: 2px solid #b49308;
+  }
+
+  .toggle-sideBar-on.toggle-sideBar.ui.button {
+    transform: rotate(0.5turn);
+  }
+
+  .sideBar.sideBar-visible {
     left: 0;
     overflow: auto;
     background: #fbbd08c9;
@@ -68,7 +87,7 @@
   .sideBar {
     position: absolute;
     left: -220px;
-    z-index: 2;
+    z-index: 1;
     overflow: hidden;
     width: 225px;
     transition: left 0.7s ease-in-out, background-color 0.7s ease-in-out;
