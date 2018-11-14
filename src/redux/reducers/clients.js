@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   loaded: false,
   error: null,
-  items: [],
+  items: []
 };
 
 export const clientsReducer = (state = initialState, action) => {
@@ -16,9 +16,20 @@ export const clientsReducer = (state = initialState, action) => {
     case CLIENTS_LOADING:
       return { ...state, isLoading: true, loaded: false };
     case CLIENTS_LOAD_SUCCEED:
-      return { ...state, isLoading: false, loaded: true, error: null, items: action.payload.clients };
+      return {
+        ...state,
+        isLoading: false,
+        loaded: true,
+        error: null,
+        items: action.payload.clients
+      };
     case CLIENTS_LOAD_FAILED:
-      return { ...state, isLoading: false, loaded: true, error: action.payload.error };
+      return {
+        ...state,
+        isLoading: false,
+        loaded: true,
+        error: action.payload.error
+      };
     default:
       return state;
   }

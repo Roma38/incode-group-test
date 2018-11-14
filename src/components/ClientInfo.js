@@ -1,22 +1,16 @@
 import React from "react";
-import { Image, Header, List, Placeholder } from "semantic-ui-react";
+import { Image, Header, List } from "semantic-ui-react";
 import { connect } from "react-redux";
+import ClientInfoPlaceholder from "./ClientInfoPlaceholder";
 
 function ClientInfoComponent({ selectedClient: client }) {
   return (
     <div className="client-info">
-      <div className="client-avatar">
-        {/* TODO сделать плейсхолдеры одним отдельным компонентом */}
-        {client ? (
-          <Image src={client.general.avatar} />
-        ) : (
-          <Placeholder style={{ height: 128, width: 128 }}>
-            <Placeholder.Image />
-          </Placeholder>
-        )}
-      </div>
-      <div>
-        {client ? (
+      {client ? (
+        <div className="client-info">
+          <div className="client-avatar">
+            <Image src={client.general.avatar} />
+          </div>
           <div>
             <Header size="huge">
               {client.general.firstName + " "}
@@ -54,26 +48,10 @@ function ClientInfoComponent({ selectedClient: client }) {
               />
             </List>
           </div>
-        ) : (
-          /* TODO вынести в `ClientInfoLoader` компонент */
-          <Placeholder className="info-placeholder">
-            <Placeholder.Header>
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Header>
-            <Placeholder.Header>
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Header>
-            <Placeholder.Paragraph>
-              <Placeholder.Line />
-              <Placeholder.Line />
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Paragraph>
-          </Placeholder>
-        )}
-      </div>
+        </div>
+      ) : (
+        <ClientInfoPlaceholder />
+      )}
     </div>
   );
 }

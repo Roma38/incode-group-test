@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Image, Input, Label } from "semantic-ui-react";
 import { selectClient } from "../redux/actions/selectedClient";
-import ClientCardPlaceholder from "./clientCardPlaceholder";
-
-/* TODO сделать так чтоб можно было исключать определeнные поля из поиска, например `general.avatar` */
-/* TODO сделать чтоб карточка с выбраным пользователем выделялась */
+import ClientCardPlaceholder from "./ClientCardPlaceholder";
 
 class SideBarComponent extends Component {
   constructor(props) {
@@ -34,31 +31,36 @@ class SideBarComponent extends Component {
           </div>
         ) : (
           <Card.Group>
-            {this.filtrClients(this.state.searchQuery).length < 1 ? (
+            {this.filterClients(this.state.searchQuery).length < 1 ? (
               <Label basic pointing className="search-label">
                 No one found :(
               </Label>
             ) : (
-              this.filtrClients(this.state.searchQuery).map((client, index) => (
-                <Card
-                  className="clientCard"
-                  key={index}
-                  onClick={() => this.props.selectClient(client)}
-                  color={client === this.props.selectedClient ? 'brown' : null}  /* TODO доделать */
-                >
-                  <Card.Content>
-                    <Image
-                      floated="left"
-                      size="mini"
-                      src={client.general.avatar}
-                    />
-                    <Card.Header>
-                      {client.general.firstName} {client.general.lastName}
-                    </Card.Header>
-                    <Card.Meta>{client.job.title}</Card.Meta>
-                  </Card.Content>
-                </Card>
-              ))
+              this.filterClients(this.state.searchQuery).map(
+                (client, index) => (
+                  <Card
+                    className={
+                      client === this.props.selectedClient
+                        ? "client-card selected-client-card"
+                        : "client-card"
+                    }
+                    key={index}
+                    onClick={() => this.props.selectClient(client)}
+                  >
+                    <Card.Content>
+                      <Image
+                        floated="left"
+                        size="mini"
+                        src={client.general.avatar}
+                      />
+                      <Card.Header>
+                        {client.general.firstName} {client.general.lastName}
+                      </Card.Header>
+                      <Card.Meta>{client.job.title}</Card.Meta>
+                    </Card.Content>
+                  </Card>
+                )
+              )
             )}
           </Card.Group>
         )}
@@ -66,8 +68,7 @@ class SideBarComponent extends Component {
     );
   }
 
-  /* TODO переименовать в `filterClients` */
-  filtrClients(searchQuery) {
+  filterClients(searchQuery) {
     if (searchQuery === "") {
       return this.props.clients;
     }

@@ -16,7 +16,7 @@
 }
 
 .search-label {
- left: 10px;
+  left: 10px;
 }
 
 .client-info {
@@ -27,10 +27,21 @@
   align-items: center;
   align-content: center;
   background: #b5cc18;
+  min-height: 100vh;
+}
+
+.selected-client-card.ui.card.client-card {
+  background: #c09106;
+}
+
+.selected-client-card.ui.card.client-card:hover {
+  background: #c09106;
 }
 
 .client-avatar {
-  padding-right: 10px;
+  margin-right: 10px;
+  height: 128px;
+  width: 128px;
 }
 
 .info-placeholder.ui.placeholder {
@@ -39,11 +50,27 @@
   margin-top: 10px;
 }
 
-/* TODO отрефакторить */
 .client-info .ui.placeholder,
 .client-info .ui.placeholder .image.header:after,
 .client-info .ui.placeholder .line,
 .client-info .ui.placeholder .line:after,
 .client-info .ui.placeholder > :before {
   background-color: #b5cc18;
+}
+
+@media all and (max-width: 480px) {
+  .sideBar:hover {
+    left: 0;
+    overflow: auto;
+    background: #fbbd08c9;
+  }
+
+  .sideBar {
+    position: absolute;
+    left: -220px;
+    z-index: 2;
+    overflow: hidden;
+    width: 225px;
+    transition: left 0.7s ease-in-out, background-color 0.7s ease-in-out;
+  }
 }

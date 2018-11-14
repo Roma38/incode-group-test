@@ -4,7 +4,7 @@ import { selectedClientReducer } from "./selectedClient";
 
 const rootReducer = combineReducers({
   clients: clientsReducer,
-  selectedClient: selectedClientReducer,
+  selectedClient: selectedClientReducer
 });
 
 export default rootReducer;

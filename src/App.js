@@ -12,11 +12,6 @@ import {
 } from "./redux/actions/clients";
 
 class AppComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.onSelectClient = this.onSelectClient.bind(this);
-  }
-
   render() {
     return (
       <div className="App">
@@ -28,11 +23,6 @@ class AppComponent extends Component {
         <ClientInfo client={null} />
       </div>
     );
-  }
-
-  onSelectClient(client) {
-    // TODO хранить `selectedClient` в redux store
-    // this.setState({ selectedClient: client });
   }
 
   componentDidMount() {
